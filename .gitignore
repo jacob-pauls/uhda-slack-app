@@ -1,0 +1,5 @@
+# Python Configuration
+__pycache__/
+
+# Virtual Environment Settings
+.venv/
