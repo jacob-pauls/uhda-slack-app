@@ -8,5 +8,4 @@ from config import get_env
 class EnvConfig(object):
     DEBUG = False
     CSRF_ENABLED = True
-    SLACK_BOT_TOKEN = get_env("SLACK_BOT_TOKEN")
     SLACK_SIGNING_SECRET = get_env('SLACK_SIGNING_SECRET')

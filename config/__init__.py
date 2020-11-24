@@ -6,3 +6,6 @@ from os import environ
 
 def get_env(key):
     return environ.get(key)
+
+def init_port(port_number):
+    return environ.get("PORT", port_number)
