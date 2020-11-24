@@ -3,3 +3,6 @@ __pycache__/
 
 # Virtual Environment Settings
 .venv/
+
+# Local Environment Settings
+.env

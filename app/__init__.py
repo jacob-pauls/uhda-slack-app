@@ -13,6 +13,6 @@ def create_flask_app():
     # Index Mapping
     @app.route("/", methods=["GET"])
     def home():
-        return 'Hello World'
+        return 'UHDA SlackApp is running!'
 
     return app
