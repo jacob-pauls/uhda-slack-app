@@ -1,4 +1,3 @@
-from app.slack_helper import SlackHelper
 from slack_sdk.web import WebClient
 from slackeventsapi import SlackEventAdapter
 
@@ -24,4 +23,10 @@ class SlackService:
             user_id = event.get("user")
             text = event.get("text")
 
-            print("The slack event adapter triggered a message! For the user: " + user_id + ", on the channel: " + channel_id + ", with the text: " + text)
+            print("The slack event adapter triggered a message!")
+            print("The message was triggered on channel: " + channel_id)
+            print("The message was triggered as the user: " + user_id)
+
+        @slack_event.on("team_join")
+        def team_join_alert(payload):
+            event = payload.get("event", {})

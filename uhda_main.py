@@ -1,7 +1,7 @@
 from config import get_env, init_port
-from app import initialize_flask_app
-from app.slack_helper import SlackHelper
-from app.slack_service import SlackService
+from app.utilities.flask_module import initialize_flask_app
+from app.utilities.slack_helper import SlackHelper
+from app.utilities.slack_service import SlackService
 
 # Jacob Pauls
 # Nov 21, 2020
