@@ -43,5 +43,6 @@ class SlackService:
 
         return self.slack_web.chat_postMessage(
             channel=channel,
+            text=message,
             blocks=blocks
         )   
