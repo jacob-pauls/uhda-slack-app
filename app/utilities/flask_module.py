@@ -13,15 +13,23 @@ app = Flask(__name__)
 def home():
     return 'UHDA SlackApp is running!'
 
+# TODO: Placeholder method, consider removing
 @app.route("/sendMessageToSlackUser", methods=["POST"])
-def triggerMessage():
+def sendMessageToSlackUser():
     # Retrieve the POST data
-    user_id = request.args.get("id")
+    channel = request.args.get("user_id")
+    username = request.args.get("username")
+    description = request.args.get("description")
+    title = request.args.get("title")
+    priority = request.args.get("priority")
+    category = request.args.get("category")
 
-    # Format the message displayed to the user
-    message = 'This message was sent from the Flask endpoint using Postman! How cool is that?'
-    
+        
     # Send the message
     slack = SlackService()
-    slack.send_slack_message(user_id, message)
-    return '<h1>UHDA Sent A Message in Slack to: ' + user_id + "</h1>"
+    slack.send_create_ticket_message(channel, username, description, title, priority, category)
+    return "<h1>UHDA Sent A Message in Slack to: " + channel + "</h1>"
+
+@app.route("/sendMessageToEmployeeChannel", methods=["POST"])
+def sendMessageToEmployeeChannel():
+    return "<h1>UHDA Sent A Message in Slack to </h1>"

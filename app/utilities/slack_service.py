@@ -1,6 +1,7 @@
 from config import get_env
 from slack_sdk.web import WebClient
 from slackeventsapi import SlackEventAdapter
+from app.utilities.slack_blocks import SlackBlockTypes
 
 # Jacob Pauls
 # Nov 21, 2020
@@ -30,16 +31,11 @@ class SlackService:
             print("user: " + user_id)
             print("text: " + text)        
 
-    def send_slack_message(self, channel, message):
-        blocks = [
-            {
-                "type": "section",
-                "text": {
-                    "type": "mrkdwn",
-                    "text": message
-                }
-            }
-        ]     
+    def send_create_ticket_message(self, channel, username, description, title, priority, category):
+        
+        blocks = SlackBlockTypes().create_ticket_block_builder(username, description, title, priority, category)
+
+        message = username + " Created a Ticket :spiral_note_pad:"
 
         return self.slack_web.chat_postMessage(
             channel=channel,
