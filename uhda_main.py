@@ -1,4 +1,3 @@
-from config import get_env, init_port
 from app.utilities.flask_module import app as flask_app
 from app.utilities.slack_service import SlackService
 

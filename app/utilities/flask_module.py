@@ -1,3 +1,4 @@
+import urllib
 from flask import Flask, request, make_response
 from app.utilities.slack_service import SlackService
 
@@ -17,15 +18,19 @@ def home():
 @app.route("/buildTicketNotification", methods=["POST"])
 def buildTicketNotification():
     # Retrieve the POST data
-    channel = request.args.get("channel")
-    username = request.args.get("username")
-    description = request.args.get("description")
-    title = request.args.get("title")
-    priority = request.args.get("priority")
-    category = request.args.get("category")
-    method = request.args.get("method")
+    channel = decode_url_param(request.args.get("channel"))
+    username = decode_url_param(request.args.get("username"))
+    description = decode_url_param(request.args.get("description"))
+    title = decode_url_param(request.args.get("title"))
+    priority = decode_url_param(request.args.get("priority"))
+    category = decode_url_param(request.args.get("category"))
+    method = decode_url_param(request.args.get("method"))
 
     # Send the message
     slack = SlackService()
     slack.send_message(channel, username, description, title, priority, category, method)
     return "<h1>UHDA Sent A Message in Slack to: " + channel + "</h1>"
+
+def decode_url_param(param):
+    decoded_param = urllib.parse.unquote(param)
+    return decoded_param

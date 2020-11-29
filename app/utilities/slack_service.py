@@ -33,7 +33,7 @@ class SlackService:
 
     def send_message(self, channel, username, description, title, priority, category, method):
         block_types = SlackBlockTypes()
-
+        
         if method == "CREATE_TICKET":
             blocks = block_types.create_ticket_block(username, description, title, priority, category)
             message = username + " Created a Ticket :spiral_note_pad:"

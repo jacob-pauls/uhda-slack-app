@@ -1,3 +1,5 @@
+from config import get_env
+
 # Jacob Pauls
 # Nov 26, 2020
 # slack_blocks.py
@@ -43,6 +45,13 @@ class SlackBlockTypes:
                         "text": ":label: *Category*: " + category
                     }
                 ]
+            },
+            {
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": "*<"+get_env('EMPLOYEE_VIEW_URL')+"|View>* \n\n"
+                }
             }
         ]
         return CREATE_TICKET_BLOCK
