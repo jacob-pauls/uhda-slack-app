@@ -31,11 +31,15 @@ class SlackService:
             print("user: " + user_id)
             print("text: " + text)        
 
-    def send_create_ticket_message(self, channel, username, description, title, priority, category):
-        
-        blocks = SlackBlockTypes().create_ticket_block_builder(username, description, title, priority, category)
+    def send_message(self, channel, username, description, title, priority, category, method):
+        block_types = SlackBlockTypes()
 
-        message = username + " Created a Ticket :spiral_note_pad:"
+        if method == "CREATE_TICKET":
+            blocks = block_types.create_ticket_block(username, description, title, priority, category)
+            message = username + " Created a Ticket :spiral_note_pad:"
+        else:
+            blocks = block_types.default_ticket_block()
+            message = " :four: :zero: :four: "   
 
         return self.slack_web.chat_postMessage(
             channel=channel,

@@ -4,7 +4,7 @@
 
 class SlackBlockTypes:
 
-    def create_ticket_block_builder(self, username, description, title, priority, category):
+    def create_ticket_block(self, username, description, title, priority, category):
         CREATE_TICKET_BLOCK =  [
             {
                 "type": "header",
@@ -46,3 +46,23 @@ class SlackBlockTypes:
             }
         ]
         return CREATE_TICKET_BLOCK
+
+    def default_ticket_block(self):
+        DEFAULT_TICKET_BLOCK = [
+            {
+                "type": "header",
+                "text": {
+                    "type": "plain_text",
+                    "text": ":four: :zero: :four:",
+                    "emoji": True
+                }
+            },
+            {
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": "*Uh oh, something weird happened!*"
+                }
+            }
+        ]
+        return DEFAULT_TICKET_BLOCK
