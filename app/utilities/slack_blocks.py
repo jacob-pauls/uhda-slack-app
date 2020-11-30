@@ -56,6 +56,42 @@ class SlackBlockTypes:
         ]
         return CREATE_TICKET_BLOCK
 
+    def assigned_ticket_block(self, ticket_data):
+        ASSIGNED_TICKET_BLOCK =  [
+            {
+                "type": "header",
+                "text": {
+                    "type": "plain_text",
+                    "text": "Assignment updated for:\n",
+                    "emoji": True
+                }
+            },
+            {
+                "type": "context",
+                "elements": [
+                    {
+                        "type": "mrkdwn",
+                        "text": ":rolled_up_newspaper: *Ticket*: " + ticket_data["title"]
+                    }
+                ]
+            },
+            {
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": ":heavy_check_mark: *" + ticket_data["username"] + "* has been assigned to your ticket!"
+                }
+            },
+            {
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": "*<"+get_env('USER_VIEW_URL')+"|View>* \n\n"
+                }
+            }
+        ]
+        return ASSIGNED_TICKET_BLOCK
+
     def default_ticket_block(self):
         DEFAULT_TICKET_BLOCK = [
             {

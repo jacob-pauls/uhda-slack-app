@@ -40,6 +40,9 @@ class SlackService:
         if method == "CREATE_TICKET":
             blocks = block_types.create_ticket_block(ticket_data)
             message = ticket_data["username"] + " Created a Ticket :spiral_note_pad:"           
+        elif method == "ASSIGNED_TICKET":
+            blocks = block_types.assigned_ticket_block(ticket_data)
+            message = ":heavy_check_mark: \t" + ticket_data["username"] + " has been assigned to your ticket!"
         else:
             blocks = block_types.default_ticket_block()
             message = " :four: :zero: :four: "   

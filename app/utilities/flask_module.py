@@ -20,7 +20,7 @@ def buildTicketNotification():
     # Retrieve the POST data
     ticket_data = {
         "channel": decode_url_param(request.args.get("channel")),
-        "username": decode_url_param(request.args.get("channel")),
+        "username": decode_url_param(request.args.get("username")),
         "description": decode_url_param(request.args.get("description")),
         "title": decode_url_param(request.args.get("title")),
         "priority": decode_url_param(request.args.get("priority")),
