@@ -62,9 +62,12 @@ class SlackBlockTypes:
                 "type": "header",
                 "text": {
                     "type": "plain_text",
-                    "text": "Assignment updated for:\n",
+                    "text": ":admission_tickets: Assignment updated for:\n",
                     "emoji": True
                 }
+            },
+            { 
+                "type": "divider" 
             },
             {
                 "type": "context",
@@ -76,21 +79,66 @@ class SlackBlockTypes:
                 ]
             },
             {
+                "type": "context",
+                "elements": [
+                    {
+                        "type": "mrkdwn",
+                        "text": ":heavy_check_mark: *" + ticket_data["username"] + "* has been assigned to your ticket!"
+                    }
+                ]
+            },
+            {
                 "type": "section",
                 "text": {
                     "type": "mrkdwn",
-                    "text": ":heavy_check_mark: *" + ticket_data["username"] + "* has been assigned to your ticket!"
+                    "text": "*<"+get_env('UHDA_URL')+"|Open UHDA>* \n\n"
+                }
+            }
+        ]
+        return ASSIGNED_TICKET_BLOCK
+
+    def pickup_ticket_block(self, ticket_data): 
+        PICKUP_TICKET_BLOCK = [ 
+            {
+                "type": "header",
+                "text": {
+                    "type": "plain_text",
+                    "text": ":admission_tickets: Your ticket has been picked up:\n",
+                    "emoji": True
+                }
+            },
+            { 
+                "type": "divider" 
+            },
+            {
+                "type": "context",
+                "elements": [
+                    {
+                        "type": "mrkdwn",
+                        "text": ":rolled_up_newspaper: *Ticket*: " + ticket_data["title"]
+                    },
+                    {
+                        "type": "mrkdwn",
+                        "text": ":heavy_check_mark: *Picked Up By:* " + ticket_data["username"]
+                    }
+                ]
+            },
+            {
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": "Thanks for your patience! We're on it!"
                 }
             },
             {
                 "type": "section",
                 "text": {
                     "type": "mrkdwn",
-                    "text": "*<"+get_env('USER_VIEW_URL')+"|View>* \n\n"
+                    "text": "*<"+get_env('UHDA_URL')+"|Open UHDA>* \n\n"
                 }
             }
-        ]
-        return ASSIGNED_TICKET_BLOCK
+        ]   
+        return PICKUP_TICKET_BLOCK
 
     def default_ticket_block(self):
         DEFAULT_TICKET_BLOCK = [
