@@ -1,0 +1,1 @@
+web: gunicorn uhda_main:app
