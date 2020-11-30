@@ -15,22 +15,7 @@ class SlackService:
         self.slack_web = WebClient(token=self.slack_bot_token)
 
     def start_event_service(self, flask_app):
-        slack_event = SlackEventAdapter(self.slack_signing_secret, "/slack/events", flask_app)
-
-        # TODO: Clean up this event, either make use of it or add the 'team_join' event
-        @slack_event.on("message")
-        def message_alert(payload):
-            event = payload.get("event", {})
-
-            # Retrieve message data from API
-            channel_id = event.get("channel")
-            user_id = event.get("user")
-            text = event.get("text")
-
-            print("The slack event adapter triggered a message!")
-            print("channel: " + channel_id)
-            print("user: " + user_id)
-            print("text: " + text)        
+        slack_event = SlackEventAdapter(self.slack_signing_secret, "/slack/events", flask_app)     
 
     def post_notification(self, ticket_data):
         block_types = SlackBlockTypes()
