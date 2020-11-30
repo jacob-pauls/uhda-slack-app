@@ -6,13 +6,13 @@ from config import get_env
 
 class SlackBlockTypes:
 
-    def create_ticket_block(self, username, description, title, priority, category):
+    def create_ticket_block(self, ticket_data):
         CREATE_TICKET_BLOCK =  [
             {
                 "type": "header",
                 "text": {
                     "type": "plain_text",
-                    "text": ":memo: \t" + username + " Created a Ticket",
+                    "text": ":memo: \t" + ticket_data["username"] + " Created a Ticket",
                     "emoji": True
                 }
             },
@@ -23,14 +23,14 @@ class SlackBlockTypes:
                 "type": "section",
                 "text": {
                     "type": "mrkdwn",
-                    "text": ":rolled_up_newspaper: *Title*: " + title + "\n\n"
+                    "text": ":rolled_up_newspaper: *Title*: " + ticket_data["title"] + "\n\n"
                 }
             },
             {
                 "type": "section",
                 "text": {
                     "type": "mrkdwn",
-                    "text": ":crystal_ball: *Description*: " + description + "\n\n"
+                    "text": ":crystal_ball: *Description*: " + ticket_data["description"] + "\n\n"
                 }
             },
             {
@@ -38,11 +38,11 @@ class SlackBlockTypes:
                 "fields": [
                     {
                         "type": "mrkdwn",
-                        "text": ":signal_strength: *Priority*: " + priority
+                        "text": ":signal_strength: *Priority*: " + ticket_data["priority"]
                     },
                     {
                         "type": "mrkdwn",
-                        "text": ":label: *Category*: " + category
+                        "text": ":label: *Category*: " + ticket_data["category"]
                     }
                 ]
             },

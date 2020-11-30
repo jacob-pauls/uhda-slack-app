@@ -17,6 +17,7 @@ class SlackService:
     def start_event_service(self, flask_app):
         slack_event = SlackEventAdapter(self.slack_signing_secret, "/slack/events", flask_app)
 
+        # TODO: Clean up this event, either make use of it or add the 'team_join' event
         @slack_event.on("message")
         def message_alert(payload):
             event = payload.get("event", {})
@@ -31,18 +32,20 @@ class SlackService:
             print("user: " + user_id)
             print("text: " + text)        
 
-    def send_message(self, channel, username, description, title, priority, category, method):
+    def send_message(self, ticket_data):
         block_types = SlackBlockTypes()
         
+        method = ticket_data["method"]
+
         if method == "CREATE_TICKET":
-            blocks = block_types.create_ticket_block(username, description, title, priority, category)
-            message = username + " Created a Ticket :spiral_note_pad:"
+            blocks = block_types.create_ticket_block(ticket_data)
+            message = ticket_data["username"] + " Created a Ticket :spiral_note_pad:"           
         else:
             blocks = block_types.default_ticket_block()
             message = " :four: :zero: :four: "   
 
         return self.slack_web.chat_postMessage(
-            channel=channel,
+            channel=ticket_data["channel"],
             text=message,
             blocks=blocks
         )   
