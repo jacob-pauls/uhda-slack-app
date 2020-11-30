@@ -29,9 +29,9 @@ def buildTicketNotification():
         "method": decode_url_param(request.args.get("method"))
     }
 
-    # Send the message
+    # Post the notification
     slack = SlackService()
-    slack.send_message(ticket_data)
+    slack.post_notification(ticket_data)
     return "<h1>UHDA Sent A Message in Slack to: " + ticket_data["channel"] + "</h1>"
 
 def decode_url_param(param):

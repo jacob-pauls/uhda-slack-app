@@ -140,13 +140,13 @@ class SlackBlockTypes:
         ]
         return ASSIGNED_TICKET_BLOCK
 
-    def status_update_block(self, ticket_data):
-        STATUS_UPDATE_BLOCK =  [
+    def field_update_block(self, ticket_data, field):
+        FIELD_UPDATE_BLOCK =  [
                 {
                     "type": "header",
                     "text": {
                         "type": "plain_text",
-                        "text": ":admission_tickets: Ticket status updated:\n",
+                        "text": ":admission_tickets: Ticket " + field + " updated:\n",
                         "emoji": True
                     }
                 },
@@ -167,7 +167,7 @@ class SlackBlockTypes:
                     "elements": [
                         {
                             "type": "mrkdwn",
-                            "text": ":heavy_check_mark: *" + ticket_data["username"] + "* set the ticket status to *" + ticket_data["status"] + "*"
+                            "text": ":heavy_check_mark: *" + ticket_data["username"] + "* set the ticket " + field + " to *" + ticket_data[field] + "*"
                         }
                     ]
                 },
@@ -179,7 +179,7 @@ class SlackBlockTypes:
                     }
                 }
             ]
-        return STATUS_UPDATE_BLOCK
+        return FIELD_UPDATE_BLOCK
 
     def error_ticket_block(self):
         DEFAULT_TICKET_BLOCK = [

@@ -32,7 +32,7 @@ class SlackService:
             print("user: " + user_id)
             print("text: " + text)        
 
-    def send_message(self, ticket_data):
+    def post_notification(self, ticket_data):
         block_types = SlackBlockTypes()
         
         method = ticket_data["method"]
@@ -47,8 +47,11 @@ class SlackService:
             blocks = block_types.assigned_ticket_block(ticket_data)
             message = ":heavy_check_mark: " + ticket_data["username"] + " has been assigned to your ticket!"
         elif method == "STATUS_UPDATE":
-            blocks = block_types.status_update_block(ticket_data)
-            message = ":heavy_check_mark: Ticket status updated in UHDA!" 
+            blocks = block_types.field_update_block(ticket_data, "status")
+            message = ":heavy_check_mark: Ticket status updated in the UHDA!" 
+        elif method == "PRIORITY_UPDATE":
+            blocks = block_types.field_update_block(ticket_data, "priority")
+            message = ":heavy_check_mark: Ticket priority updated in the UHDA!"
         else:
             blocks = block_types.error_ticket_block()
             message = " :four: :zero: :four: "   
