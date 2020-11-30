@@ -37,6 +37,8 @@ class SlackService:
         
         method = ticket_data["method"]
 
+        # Cycle through possible notification methods
+        # Send JSON payload respective to the notification method
         if method == "CREATE_TICKET":
             blocks = block_types.create_ticket_block(ticket_data)
             message = ticket_data["username"] + " Created a Ticket :spiral_note_pad:"           

@@ -140,6 +140,8 @@ class SlackBlockTypes:
         ]
         return ASSIGNED_TICKET_BLOCK
 
+    # Definition for JSON payload sent to Slack upon a field update
+    # The field paramter must match the name of the paramter retrieved from the POST data
     def field_update_block(self, ticket_data, field):
         FIELD_UPDATE_BLOCK =  [
                 {
@@ -181,6 +183,7 @@ class SlackBlockTypes:
             ]
         return FIELD_UPDATE_BLOCK
 
+    # Definition for the JSON payload sent to Slack in the event of an error (undefined notification method)
     def error_ticket_block(self):
         DEFAULT_TICKET_BLOCK = [
             {
