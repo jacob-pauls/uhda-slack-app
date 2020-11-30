@@ -1,1 +1,1 @@
-web: gunicorn uhda_main:app
+web: gunicorn uhda_main:flask_app
