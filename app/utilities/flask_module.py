@@ -24,6 +24,7 @@ def buildTicketNotification():
         "description": decode_url_param(request.args.get("description")),
         "title": decode_url_param(request.args.get("title")),
         "priority": decode_url_param(request.args.get("priority")),
+        "status": decode_url_param(request.args.get("status")),
         "category": decode_url_param(request.args.get("category")),
         "method": decode_url_param(request.args.get("method"))
     }

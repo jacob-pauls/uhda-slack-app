@@ -56,47 +56,6 @@ class SlackBlockTypes:
         ]
         return CREATE_TICKET_BLOCK
 
-    def assigned_ticket_block(self, ticket_data):
-        ASSIGNED_TICKET_BLOCK =  [
-            {
-                "type": "header",
-                "text": {
-                    "type": "plain_text",
-                    "text": ":admission_tickets: Assignment updated for:\n",
-                    "emoji": True
-                }
-            },
-            { 
-                "type": "divider" 
-            },
-            {
-                "type": "context",
-                "elements": [
-                    {
-                        "type": "mrkdwn",
-                        "text": ":rolled_up_newspaper: *Ticket*: " + ticket_data["title"]
-                    }
-                ]
-            },
-            {
-                "type": "context",
-                "elements": [
-                    {
-                        "type": "mrkdwn",
-                        "text": ":heavy_check_mark: *" + ticket_data["username"] + "* has been assigned to your ticket!"
-                    }
-                ]
-            },
-            {
-                "type": "section",
-                "text": {
-                    "type": "mrkdwn",
-                    "text": "*<"+get_env('UHDA_URL')+"|Open UHDA>* \n\n"
-                }
-            }
-        ]
-        return ASSIGNED_TICKET_BLOCK
-
     def pickup_ticket_block(self, ticket_data): 
         PICKUP_TICKET_BLOCK = [ 
             {
@@ -140,7 +99,89 @@ class SlackBlockTypes:
         ]   
         return PICKUP_TICKET_BLOCK
 
-    def default_ticket_block(self):
+    def assigned_ticket_block(self, ticket_data):
+        ASSIGNED_TICKET_BLOCK =  [
+            {
+                "type": "header",
+                "text": {
+                    "type": "plain_text",
+                    "text": ":admission_tickets: Ticket assignment updated:\n",
+                    "emoji": True
+                }
+            },
+            { 
+                "type": "divider" 
+            },
+            {
+                "type": "context",
+                "elements": [
+                    {
+                        "type": "mrkdwn",
+                        "text": ":rolled_up_newspaper: *Ticket*: " + ticket_data["title"]
+                    }
+                ]
+            },
+            {
+                "type": "context",
+                "elements": [
+                    {
+                        "type": "mrkdwn",
+                        "text": ":heavy_check_mark: *" + ticket_data["username"] + "* has been assigned to your ticket!"
+                    }
+                ]
+            },
+            {
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": "*<"+get_env('UHDA_URL')+"|Open UHDA>* \n\n"
+                }
+            }
+        ]
+        return ASSIGNED_TICKET_BLOCK
+
+    def status_update_block(self, ticket_data):
+        STATUS_UPDATE_BLOCK =  [
+                {
+                    "type": "header",
+                    "text": {
+                        "type": "plain_text",
+                        "text": ":admission_tickets: Ticket status updated:\n",
+                        "emoji": True
+                    }
+                },
+                { 
+                    "type": "divider" 
+                },
+                {
+                    "type": "context",
+                    "elements": [
+                        {
+                            "type": "mrkdwn",
+                            "text": ":rolled_up_newspaper: *Ticket*: " + ticket_data["title"]
+                        }
+                    ]
+                },
+                {
+                    "type": "context",
+                    "elements": [
+                        {
+                            "type": "mrkdwn",
+                            "text": ":heavy_check_mark: *" + ticket_data["username"] + "* set the ticket status to *" + ticket_data["status"] + "*"
+                        }
+                    ]
+                },
+                {
+                    "type": "section",
+                    "text": {
+                        "type": "mrkdwn",
+                        "text": "*<"+get_env('UHDA_URL')+"|Open UHDA>* \n\n"
+                    }
+                }
+            ]
+        return STATUS_UPDATE_BLOCK
+
+    def error_ticket_block(self):
         DEFAULT_TICKET_BLOCK = [
             {
                 "type": "header",
